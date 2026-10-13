@@ -53,10 +53,10 @@ export const personalInfo: PersonalInfo = {
   showAvailabilityBadge: true,
 
   // TODO: Replace with your city and country
-  location: "Khandwa, Madhya Pradesh, India",
+  location: "Bhopal, Madhya Pradesh, India",
 
   // TODO: Replace with your university name
-  university: "bhabha University bhopal",
+  university: "Bhabha University Bhopal",
 
   degree: "B.Tech in Computer Science Engineering",
 
