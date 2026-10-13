@@ -1,36 +1,122 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Soban Ahmad — Personal Portfolio & Data Science Showcase
 
-## Getting Started
+> Clean, responsive, and editorial portfolio showcasing foundational work in Artificial Intelligence, Machine Learning, Exploratory Data Analysis (EDA), and reproducible Python/Pandas workflows.
 
-First, run the development server:
+- **Live URL**: [https://soban-portfolio-seven.vercel.app](https://soban-portfolio-seven.vercel.app)
+- **Repository**: [https://github.com/SobanAhmad-28/Soban-portfolio](https://github.com/SobanAhmad-28/Soban-portfolio)
 
+---
+
+## 🎯 Project Purpose
+
+This portfolio serves as an authentic technical profile and project archive for **Soban Ahmad**, a Computer Science Engineering student concentrating on AI/ML and Data Science.
+
+Unlike generic developer templates filled with synthetic claims or exaggerated metrics, this portfolio focuses on:
+- **Transparent Learning**: Documenting practical exploration in data cleaning, exploratory data analysis, and relational querying.
+- **Reproducible Projects**: Deep-dive case studies detailing datasets, methodology, challenges, and actual findings.
+- **Editorial Design System**: Typography-first layout pairing Newsreader (editorial serif), Inter (clean sans-serif), and JetBrains Mono (technical code font).
+- **Interactive Visual Polish**: Canvas 2D ambient particle physics (`AntigravityCanvas`) providing subtle motion without performance degradation.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Framework**: [Next.js 16](https://nextjs.org/) (App Router, Turbopack, Partial Prerendering)
+- **Language**: [TypeScript](https://www.typescriptlang.org/) (Strict type-checking)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Typography**: [Google Fonts](https://fonts.google.com/) via `next/font` (Newsreader, Inter, JetBrains Mono)
+- **Animation & Graphics**: HTML5 Canvas 2D with spring-damped particle physics, `IntersectionObserver` auto-pausing, and `prefers-reduced-motion` compliance
+- **SEO & Discoverability**: Metadata API, dynamic `sitemap.xml`, `robots.txt`, and Open Graph tags
+- **Deployment**: [Vercel](https://vercel.com/)
+
+---
+
+## ✨ Features
+
+1. **Editorial Hero Section**:
+   - Moniker, tagline, and real-time availability status badge (driven centrally via `src/data/personal.ts`).
+   - Interactive Antigravity dot/dash particle canvas reacting smoothly to mouse movement.
+   - Interactive student code terminal box illustrating authentic Pandas EDA workflows.
+   - 4-card glance bento strip highlighting location, university, degree, and active stack.
+
+2. **About Section**:
+   - Authentic narrative describing current engineering interests, foundational focus, and realistic career objectives.
+   - Academic details, core focus pillars, and personal philosophy.
+
+3. **Skills & Tools Directory**:
+   - Categorized across **Data & AI** (Python, Pandas, NumPy, Scikit-learn, EDA), **Core Engineering** (C/C++, SQL, Git, Linux), and **Workflow & Analysis** (Jupyter, VS Code, Kaggle, GitHub).
+   - Interactive category filtering with clean badge counts.
+
+4. **Featured Projects & Deep-Dive Case Studies**:
+   - Curated project cards with status indicators (`Completed` / `In Progress`).
+   - Dedicated dynamic case-study routes (`/projects/[slug]`) featuring dataset details, statistical breakdowns, methodology, reproducible code snippets, key observations, and limitations.
+
+5. **Academic & Learning Journey**:
+   - Interactive chronological timeline documenting coursework, milestones, and personal skill development.
+
+6. **Direct Contact Section**:
+   - One-click email copy with instant feedback.
+   - Safe contact dispatch: Supports direct Gmail compose and native `mailto` pre-filled links.
+   - Optional Web3Forms API background submission (safely degrades to webmail if no key is configured).
+
+---
+
+## 🚀 Local Setup & Development
+
+### Prerequisites
+- Node.js 18.18.0 or newer
+- npm, pnpm, or yarn
+
+### 1. Clone the repository
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/SobanAhmad-28/Soban-portfolio.git
+cd Soban-portfolio
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Install dependencies
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. Run development server
+```bash
+npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🧪 Available Scripts
 
-To learn more about Next.js, take a look at the following resources:
+| Command | Purpose |
+| :--- | :--- |
+| `npm run dev` | Starts local Next.js development server with Turbopack |
+| `npm run build` | Compiles optimized production bundle with TypeScript checks |
+| `npm run start` | Starts production server locally after building |
+| `npm run lint` | Runs ESLint across the codebase |
+| `npx tsc --noEmit` | Runs strict TypeScript compiler check without emitting output |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## ⚙️ Configuration & Personalization
 
-## Deploy on Vercel
+All personal and project data are decoupled from presentation components and centralized in two configuration files:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **`src/data/personal.ts`**: Contains name, bio, social URLs, email, education, university, location, and optional availability badge toggle (`showAvailabilityBadge`).
+- **`src/data/projects.ts`**: Contains the project directory, tags, metrics, problem statements, code examples, and case study content.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 📌 Honest Project Status
+
+- **Status**: Active student portfolio & technical learning log.
+- **Education**: Computer Science Engineering undergraduate.
+- **Current Learning**: Deepening knowledge in statistical thinking, feature engineering, and reproducible data workflows.
+- All code, datasets, and projects presented in this portfolio reflect authentic coursework and independent student experimentation.
+
+---
+
+## 📄 License
+
+This project is open-source under the [MIT License](LICENSE).

@@ -166,7 +166,7 @@ export default function Hero() {
                     &bull; Data cleaning and handling missing values with Pandas
                   </div>
                   <div className="text-emerald-400 pl-5">
-                    &bull; 100% genuine code &amp; reproducible student projects
+                    &bull; Documented workflows &amp; reproducible student projects
                   </div>
                 </div>
               </div>
@@ -183,14 +183,14 @@ export default function Hero() {
                 </span>
                 <span className="flex items-center gap-1 text-emerald-400">
                   <Sparkles className="w-3 h-3" />
-                  Real Projects
+                  Hands-on Projects
                 </span>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Real Recruiter Glance 4-Card Bento Strip (100% Real Info) */}
+        {/* Recruiter Glance 4-Card Bento Strip */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
           <div className="p-4 bg-surface-container-lowest/90 backdrop-blur-md border border-outline-variant/60 rounded-lg shadow-xs hover:border-primary/40 transition-all flex items-center gap-3">
             <div className="w-10 h-10 rounded-lg bg-surface-container-low flex items-center justify-center text-primary border border-outline-variant/40 shrink-0">

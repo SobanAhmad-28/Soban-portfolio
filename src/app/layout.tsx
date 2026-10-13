@@ -25,6 +25,10 @@ const newsreader = Newsreader({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://soban-portfolio-seven.vercel.app"),
+  alternates: {
+    canonical: "/",
+  },
   title: `${personalInfo.firstName} ${personalInfo.lastName} — Portfolio`,
   description: `${personalInfo.tagline}. ${personalInfo.degree} at ${personalInfo.university}. Exploring AI/ML and Data Science.`,
   keywords: [
@@ -40,6 +44,8 @@ export const metadata: Metadata = {
   openGraph: {
     title: `${personalInfo.firstName} ${personalInfo.lastName} — Portfolio`,
     description: personalInfo.tagline,
+    url: "https://soban-portfolio-seven.vercel.app",
+    siteName: `${personalInfo.firstName} ${personalInfo.lastName} Portfolio`,
     type: "website",
   },
 };

@@ -6,7 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    // TODO: Replace with your actual domain
-    sitemap: "https://your-domain.vercel.app/sitemap.xml",
+    sitemap: "https://soban-portfolio-seven.vercel.app/sitemap.xml",
   };
 }

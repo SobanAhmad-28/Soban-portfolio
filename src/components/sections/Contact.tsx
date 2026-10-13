@@ -58,11 +58,22 @@ export default function Contact() {
 
     if (!name || !email || !body) return;
 
+    const accessKey = personalInfo.web3FormsAccessKey?.trim();
+
+    // If no personal Web3Forms access key is configured, do not submit to the API.
+    // Instead, provide a clear Gmail compose and direct-email fallback.
+    if (!accessKey) {
+      setStatus("fallback");
+      setErrorMessage(
+        "Direct API sending is not configured. Please use instant Gmail compose or your default email client below."
+      );
+      return;
+    }
+
     setStatus("loading");
     setErrorMessage("");
 
     try {
-      const accessKey = personalInfo.web3FormsAccessKey || "c20ce5b0-75d5-452f-b44c-20a221f5be67";
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: {
@@ -75,7 +86,7 @@ export default function Contact() {
           email,
           message: body,
           subject: `Portfolio Inquiry from ${name}`,
-          from_name: "Soban Ahmad Portfolio",
+          from_name: `${personalInfo.firstName} ${personalInfo.lastName} Portfolio`,
         }),
       });
 
@@ -93,14 +104,22 @@ export default function Contact() {
     }
   };
 
+  const formattedBody = formData.body
+    ? `Hi ${personalInfo.firstName},\n\n${formData.body}\n\nBest regards,\n${formData.name} (${formData.email})`
+    : `Hi ${personalInfo.firstName},\n\nI came across your portfolio and would like to discuss...`;
+
   const gmailComposeUrl = personalInfo.email
     ? `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
         personalInfo.email
       )}&su=${encodeURIComponent(
-        formData.name ? `Inquiry from ${formData.name}` : "Portfolio Inquiry — Soban Ahmad"
-      )}&body=${encodeURIComponent(
-        formData.body || "Hi Soban,\n\nI came across your portfolio and would like to discuss..."
-      )}`
+        formData.name ? `Inquiry from ${formData.name}` : `Portfolio Inquiry — ${personalInfo.firstName} ${personalInfo.lastName}`
+      )}&body=${encodeURIComponent(formattedBody)}`
+    : "";
+
+  const mailtoUrl = personalInfo.email
+    ? `mailto:${encodeURIComponent(personalInfo.email)}?subject=${encodeURIComponent(
+        formData.name ? `Inquiry from ${formData.name}` : `Portfolio Inquiry — ${personalInfo.firstName} ${personalInfo.lastName}`
+      )}&body=${encodeURIComponent(formattedBody)}`
     : "";
 
   return (
@@ -116,10 +135,12 @@ export default function Contact() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Left Column: Direct Outreach & Channels (5 cols) */}
         <div className="lg:col-span-5 bg-surface-container-lowest/90 backdrop-blur-sm border border-outline-variant/60 rounded-2xl p-6 sm:p-8 shadow-xs">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-50 border border-emerald-200 rounded-full text-xs font-mono text-emerald-800 font-medium mb-4">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />
-            <span>Available for Internships &amp; Entry AI/DS Roles</span>
-          </div>
+          {personalInfo.showAvailabilityBadge && (
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-50 border border-emerald-200 rounded-full text-xs font-mono text-emerald-800 font-medium mb-4">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />
+              <span>Available for Internships &amp; Entry AI/DS Roles</span>
+            </div>
+          )}
 
           <h3 className="font-editorial text-2xl sm:text-3xl text-on-surface font-normal leading-snug mb-3">
             Let&apos;s discuss internships, data analysis &amp; applied AI projects.
@@ -200,7 +221,7 @@ export default function Contact() {
               Direct Inquiry Form
             </h4>
             <span className="text-[11px] font-mono text-outline">
-              Replies within 24h
+              Direct Contact
             </span>
           </div>
 
@@ -226,23 +247,35 @@ export default function Contact() {
           ) : status === "fallback" ? (
             <div className="p-5 bg-amber-50/80 border border-amber-200 rounded-xl space-y-4">
               <div>
-                <h5 className="font-semibold text-amber-950 text-sm">Direct Webmail Option</h5>
+                <h5 className="font-semibold text-amber-950 text-sm">Direct Email Dispatch</h5>
                 <p className="text-xs text-amber-900 mt-1">
-                  {errorMessage || "You can launch Gmail directly with your message pre-filled."}
+                  {errorMessage || "Choose your preferred email client below with your message pre-filled."}
                 </p>
               </div>
 
               <div className="flex flex-wrap gap-2 pt-2">
-                <a
-                  href={gmailComposeUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 bg-primary hover:bg-accent-hover text-surface-container-lowest rounded-lg text-xs font-mono font-medium transition-colors"
-                >
-                  <Mail className="w-3.5 h-3.5" />
-                  <span>Open in Gmail Compose</span>
-                  <ExternalLink className="w-3 h-3 ml-1" />
-                </a>
+                {gmailComposeUrl && (
+                  <a
+                    href={gmailComposeUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-4 py-2 bg-primary hover:bg-accent-hover text-surface-container-lowest rounded-lg text-xs font-mono font-medium transition-colors"
+                  >
+                    <Mail className="w-3.5 h-3.5" />
+                    <span>Open in Gmail</span>
+                    <ExternalLink className="w-3 h-3 ml-1" />
+                  </a>
+                )}
+
+                {mailtoUrl && (
+                  <a
+                    href={mailtoUrl}
+                    className="inline-flex items-center gap-1.5 px-3 py-2 bg-surface-container-lowest border border-outline-variant/60 text-on-surface rounded-lg text-xs font-mono transition-colors hover:border-primary"
+                  >
+                    <Mail className="w-3.5 h-3.5 text-primary" />
+                    <span>Open Mail App</span>
+                  </a>
+                )}
 
                 <button
                   type="button"
@@ -259,7 +292,7 @@ export default function Contact() {
                   className="inline-flex items-center gap-1 px-3 py-2 text-outline hover:text-on-surface text-xs font-mono"
                 >
                   <RotateCcw className="w-3 h-3" />
-                  <span>Retry Form</span>
+                  <span>Edit Note</span>
                 </button>
               </div>
             </div>
@@ -274,6 +307,7 @@ export default function Contact() {
                     type="text"
                     name="name"
                     required
+                    defaultValue={formData.name}
                     placeholder="e.g. Alex Kumar"
                     className="w-full px-3.5 py-2.5 rounded-lg border border-outline-variant/60 bg-surface-container-low/40 focus:bg-surface-container-lowest focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-xs text-on-surface font-sans"
                   />
@@ -287,6 +321,7 @@ export default function Contact() {
                     type="email"
                     name="email"
                     required
+                    defaultValue={formData.email}
                     placeholder="alex@example.com"
                     className="w-full px-3.5 py-2.5 rounded-lg border border-outline-variant/60 bg-surface-container-low/40 focus:bg-surface-container-lowest focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-xs text-on-surface font-sans"
                   />
@@ -301,6 +336,7 @@ export default function Contact() {
                   name="body"
                   required
                   rows={4}
+                  defaultValue={formData.body}
                   placeholder="Share details about the role, internship project, or collaboration..."
                   className="w-full px-3.5 py-2.5 rounded-lg border border-outline-variant/60 bg-surface-container-low/40 focus:bg-surface-container-lowest focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-xs text-on-surface font-sans leading-relaxed"
                 />
@@ -308,7 +344,7 @@ export default function Contact() {
 
               <div className="flex items-center justify-between pt-2">
                 <span className="text-[11px] font-mono text-outline">
-                  Zero spam guaranteed.
+                  Direct message to inbox
                 </span>
 
                 <button

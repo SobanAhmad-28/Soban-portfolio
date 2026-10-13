@@ -2,8 +2,7 @@ import type { MetadataRoute } from "next";
 import { projects } from "@/data/projects";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  // TODO: Replace with your actual domain
-  const baseUrl = "https://your-domain.vercel.app";
+  const baseUrl = "https://soban-portfolio-seven.vercel.app";
 
   const projectRoutes = projects.map((project) => ({
     url: `${baseUrl}/projects/${project.slug}`,
