@@ -37,7 +37,7 @@ export const personalInfo: PersonalInfo = {
   ],
 
   // TODO: Replace with your real email
-  email: "SobanAhmad@gmail.com",
+  email: "SobanAhmad-W@outlook.com",
 
   // TODO: Replace with your GitHub profile URL (or set to "" to hide)
   githubUrl: "https://github.com/SobanAhmad-28",
