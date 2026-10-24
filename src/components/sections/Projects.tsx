@@ -56,7 +56,7 @@ export default function Projects() {
               <div className="lg:col-span-7">
                 <div className="flex flex-wrap items-center gap-2.5 mb-4">
                   <span className="text-[11px] font-mono text-outline uppercase tracking-wider font-semibold">
-                    {project.completedDate} {"//"} DATA CLEANING &amp; EDA
+                    {project.completedDate} {"//"} {project.category ?? "DATA CLEANING & EDA"}
                   </span>
                   {project.status === "in-progress" ? (
                     <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-amber-50 text-amber-800 border border-amber-200 rounded-full text-[11px] font-mono font-medium">
@@ -96,6 +96,38 @@ export default function Projects() {
                   {project.overview}
                 </p>
 
+                {/* Key Verified Findings (if available) */}
+                {project.keyFindings && project.keyFindings.length > 0 && (
+                  <div className="mb-6 p-4 bg-surface-container-low/70 border border-outline-variant/50 rounded-xl">
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="w-2 h-2 rounded-full bg-emerald-600" />
+                      <h4 className="text-xs font-mono font-semibold text-on-surface uppercase tracking-wider">
+                        Key Verified Findings
+                      </h4>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                      {project.keyFindings.map((finding, idx) => (
+                        <div
+                          key={idx}
+                          className="bg-surface-container-lowest/90 border border-outline-variant/40 rounded-lg p-2.5"
+                        >
+                          <span className="text-[10px] font-mono text-outline block uppercase tracking-wider">
+                            {finding.label}
+                          </span>
+                          <span className="text-sm font-mono font-bold text-primary block mt-0.5">
+                            {finding.value}
+                          </span>
+                          {finding.context && (
+                            <span className="text-[11px] text-on-surface-variant block mt-0.5">
+                              {finding.context}
+                            </span>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
                 {/* Card Actions */}
                 <div className="flex flex-wrap items-center gap-3">
                   <Link
@@ -114,7 +146,7 @@ export default function Projects() {
                       className="bg-surface-container-low border border-outline-variant/60 hover:border-primary/40 text-on-surface hover:text-primary px-4 py-2.5 rounded-lg text-sm font-medium flex items-center gap-2 transition-all"
                     >
                       <GithubIcon className="h-4 w-4" />
-                      <span>Inspect Code</span>
+                      <span>View on GitHub</span>
                       <ExternalLink className="h-3.5 w-3.5 text-outline" />
                     </a>
                   ) : (
@@ -177,7 +209,7 @@ export default function Projects() {
                 {/* Bottom Status Tag */}
                 <div className="mt-6 pt-4 border-t border-outline-variant/30 flex items-center justify-between text-[11px] font-mono text-outline">
                   <span>Status: {project.completedDate}</span>
-                  <span className="text-primary font-medium">Pandas &amp; Python</span>
+                  <span className="text-primary font-medium">{project.tags.slice(0, 2).join(" & ")}</span>
                 </div>
               </div>
             </div>

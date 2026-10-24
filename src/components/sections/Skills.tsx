@@ -15,6 +15,7 @@ export default function Skills() {
       case "pandas":
         return FileSpreadsheet;
       case "sql":
+      case "mysql":
         return Database;
       case "numpy":
         return Cpu;
@@ -170,6 +171,9 @@ export default function Skills() {
           </span>
           <span className="px-2.5 py-1 bg-surface-container-low border border-outline-variant/40 rounded">
             Python 3.11+
+          </span>
+          <span className="px-2.5 py-1 bg-surface-container-low border border-outline-variant/40 rounded">
+            MySQL Workbench
           </span>
           <span className="px-2.5 py-1 bg-surface-container-low border border-outline-variant/40 rounded">
             PowerShell &amp; CLI
