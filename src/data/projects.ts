@@ -79,31 +79,4 @@ export const projects: Project[] = [
     completedDate: "Completed",
     status: "completed",
   },
-  {
-    slug: "ecommerce-order-status-analysis",
-    title: "E-commerce Order Status Analysis",
-    shortDescription:
-      "Exploring order status frequency and practising data cleaning and analysis with Pandas.",
-    thumbnailPath: null,
-    tags: ["Python", "Pandas", "Data Analysis"],
-    // TODO: Add your GitHub URL when the repo is public
-    githubUrl: "",
-    liveDemoUrl: "",
-    featured: true,
-    category: "DATA CLEANING & EDA",
-    overview:
-      "An exploratory data analysis project focused on understanding e-commerce order statuses. The project involves loading, cleaning, and analysing order data to identify frequency distributions of different order statuses.",
-    problem:
-      "Understanding the distribution and patterns of order statuses in e-commerce data to practise real-world data analysis workflows.",
-    approach:
-      "Using Python and Pandas to load the dataset, clean the data by handling missing values and inconsistencies, and perform frequency analysis on order status columns.",
-    keyLearnings: [
-      "Data loading and initial exploration with Pandas",
-      "Data cleaning techniques for handling missing and inconsistent data",
-      "Frequency analysis and value counts for categorical data",
-    ],
-    screenshots: [],
-    completedDate: "In Progress",
-    status: "in-progress",
-  },
 ];

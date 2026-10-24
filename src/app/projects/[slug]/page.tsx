@@ -8,8 +8,6 @@ import {
   Table,
   CheckCircle2,
   Info,
-  Clock,
-  AlertCircle,
   Database,
   TrendingUp,
   Award,
@@ -54,9 +52,6 @@ export default async function ProjectPage({ params }: PageProps) {
     notFound();
   }
 
-  const isPending = project.status === "in-progress";
-  const isSqlProject = project.slug === "olist-ecommerce-sql-analysis";
-
   return (
     <div className="pt-24 pb-20">
       <div className="mx-auto max-w-[1200px] px-4 sm:px-6">
@@ -72,17 +67,10 @@ export default async function ProjectPage({ params }: PageProps) {
 
           <div className="flex items-center gap-2 text-xs font-mono text-on-surface-variant">
             <span>STATUS:</span>
-            {isPending ? (
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-amber-50 text-amber-800 border border-amber-200 font-medium">
-                <span className="w-1.5 h-1.5 rounded-full bg-amber-600 animate-pulse" />
-                In Progress
-              </span>
-            ) : (
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 font-medium">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
-                Completed
-              </span>
-            )}
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 font-medium">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
+              Completed
+            </span>
           </div>
         </div>
 
@@ -90,9 +78,9 @@ export default async function ProjectPage({ params }: PageProps) {
         <section className="mb-12">
           <div className="max-w-4xl">
             <div className="inline-flex items-center gap-2 px-2.5 py-1 mb-4 rounded bg-primary-light border border-indigo-100 text-primary text-[11px] font-mono">
-              <span>{isSqlProject ? "COMPLETED SQL PROJECT" : "STUDENT EXPLORATORY PROJECT"}</span>
+              <span>COMPLETED SQL PROJECT</span>
               <span>•</span>
-              <span>{project.category ?? (isSqlProject ? "SQL & RELATIONAL ANALYTICS" : "DATA CLEANING & ANALYSIS")}</span>
+              <span>{project.category ?? "SQL & RELATIONAL ANALYTICS"}</span>
             </div>
 
             <h1 className="font-editorial text-3xl sm:text-4xl lg:text-5xl font-normal text-on-surface tracking-tight mb-4 leading-tight">
@@ -113,7 +101,7 @@ export default async function ProjectPage({ params }: PageProps) {
               <div className="mt-2">
                 <p className="text-sm font-semibold text-on-surface">Student Developer &amp; Analyst</p>
                 <p className="text-[11px] font-mono text-on-surface-variant mt-0.5">
-                  {isSqlProject ? "Relational Database Analysis" : "Independent Exploratory Project"}
+                  Relational Database Analysis
                 </p>
               </div>
             </div>
@@ -127,7 +115,7 @@ export default async function ProjectPage({ params }: PageProps) {
                   {project.completedDate}
                 </p>
                 <p className="text-[11px] font-mono text-on-surface-variant mt-0.5">
-                  {isSqlProject ? "Verified Query Results" : "Active Learning & Verification"}
+                  Verified Query Results
                 </p>
               </div>
             </div>
@@ -170,7 +158,7 @@ export default async function ProjectPage({ params }: PageProps) {
                   </span>
                 )}
                 <p className="text-[11px] font-mono text-on-surface-variant">
-                  {isSqlProject ? "SQL Scripts (.sql) • MySQL Workbench" : "Jupyter Notebook (.ipynb)"}
+                  SQL Scripts (.sql) • MySQL Workbench
                 </p>
               </div>
             </div>
@@ -181,154 +169,149 @@ export default async function ProjectPage({ params }: PageProps) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
           {/* LEFT 8-COLUMN COLUMN: RESEARCH ESSAY & WORKFLOW */}
           <div className="lg:col-span-8 space-y-12">
-            {isSqlProject ? (
-              /* ============================================================ */
-              /* SQL PROJECT: Olist E-commerce SQL Analysis Content            */
-              /* ============================================================ */
-              <>
-                {/* SECTION 01 // OVERVIEW & PROBLEM STATEMENT */}
-                <section id="problem-statement" className="scroll-mt-24">
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="text-xs font-mono text-primary font-semibold">SECTION 01</span>
-                    <span className="h-px w-8 bg-outline-variant/60" />
-                    <h2 className="text-xl font-semibold text-on-surface">Problem Statement &amp; Scope</h2>
-                  </div>
+            {/* SECTION 01 // OVERVIEW & PROBLEM STATEMENT */}
+            <section id="problem-statement" className="scroll-mt-24">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="text-xs font-mono text-primary font-semibold">SECTION 01</span>
+                <span className="h-px w-8 bg-outline-variant/60" />
+                <h2 className="text-xl font-semibold text-on-surface">Problem Statement &amp; Scope</h2>
+              </div>
 
-                  <div className="space-y-4 text-sm sm:text-base text-on-surface-variant leading-relaxed">
-                    <p>{project.overview}</p>
-                    <p>{project.problem}</p>
-                    <div className="p-3.5 bg-surface-container-low border border-outline-variant/40 rounded font-mono text-xs text-on-surface">
-                      Analytical Scope: Brazilian Olist E-Commerce Dataset → Orders, Items, Products, Sellers, Customer Reviews
-                    </div>
-                    <p className="text-xs sm:text-sm text-outline">
-                      Conducted using MySQL and MySQL Workbench to practice complex relational joins, data aggregation, time-series sales trend analysis, and business intelligence querying on real-world e-commerce transactional data.
-                    </p>
-                  </div>
-                </section>
+              <div className="space-y-4 text-sm sm:text-base text-on-surface-variant leading-relaxed">
+                <p>{project.overview}</p>
+                <p>{project.problem}</p>
+                <div className="p-3.5 bg-surface-container-low border border-outline-variant/40 rounded font-mono text-xs text-on-surface">
+                  Analytical Scope: Brazilian Olist E-Commerce Dataset → Orders, Items, Products, Sellers, Customer Reviews
+                </div>
+                <p className="text-xs sm:text-sm text-outline">
+                  Conducted using MySQL and MySQL Workbench to practice complex relational joins, data aggregation, time-series sales trend analysis, and business intelligence querying on real-world e-commerce transactional data.
+                </p>
+              </div>
+            </section>
 
-                {/* SECTION 02 // DATASET & RELATIONAL SCHEMA */}
-                <section id="dataset-schema" className="scroll-mt-24">
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="text-xs font-mono text-primary font-semibold">SECTION 02</span>
-                    <span className="h-px w-8 bg-outline-variant/60" />
-                    <h2 className="text-xl font-semibold text-on-surface">Relational Dataset &amp; Schema Overview</h2>
-                  </div>
+            {/* SECTION 02 // DATASET & RELATIONAL SCHEMA */}
+            <section id="dataset-schema" className="scroll-mt-24">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="text-xs font-mono text-primary font-semibold">SECTION 02</span>
+                <span className="h-px w-8 bg-outline-variant/60" />
+                <h2 className="text-xl font-semibold text-on-surface">Relational Dataset &amp; Schema Overview</h2>
+              </div>
 
-                  <p className="text-sm text-on-surface-variant leading-relaxed mb-4">
-                    The project analyzes five core relational tables from the Brazilian Olist E-Commerce database, connecting customer order lifecycles with purchased items, product metadata, merchant identifiers, and satisfaction reviews.
+              <p className="text-sm text-on-surface-variant leading-relaxed mb-4">
+                The project analyzes five core relational tables from the Brazilian Olist E-Commerce database, connecting customer order lifecycles with purchased items, product metadata, merchant identifiers, and satisfaction reviews.
+              </p>
+
+              {/* Monospace Schema Table */}
+              <div className="bg-surface-container-lowest border border-outline-variant/40 rounded overflow-hidden shadow-xs">
+                <div className="bg-surface-container-low px-4 py-2.5 border-b border-outline-variant/30 flex justify-between items-center text-xs font-mono">
+                  <span className="text-on-surface font-semibold flex items-center gap-1.5">
+                    <Table className="h-4 w-4 text-primary" />
+                    Relational Tables Analyzed
+                  </span>
+                  <span className="text-emerald-700 text-[11px] font-medium flex items-center gap-1">
+                    <CheckCircle2 className="h-3 w-3" />
+                    Relational Joins Verified
+                  </span>
+                </div>
+
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left border-collapse text-xs font-mono">
+                    <thead>
+                      <tr className="border-b border-outline-variant/30 text-outline bg-surface/50">
+                        <th className="py-2.5 px-4 font-medium">Table Name</th>
+                        <th className="py-2.5 px-4 font-medium">Key Identifiers</th>
+                        <th className="py-2.5 px-4 font-medium">Analytical Purpose</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-outline-variant/20 text-on-surface">
+                      <tr>
+                        <td className="py-2.5 px-4 font-semibold text-primary">orders</td>
+                        <td className="py-2.5 px-4 text-on-surface-variant">order_id (PK), customer_id</td>
+                        <td className="py-2.5 px-4 text-on-surface-variant">Order status filtering (delivered) &amp; timestamp milestones</td>
+                      </tr>
+                      <tr className="bg-surface/30">
+                        <td className="py-2.5 px-4 font-semibold text-primary">order_items</td>
+                        <td className="py-2.5 px-4 text-on-surface-variant">order_id (FK), product_id, seller_id</td>
+                        <td className="py-2.5 px-4 text-on-surface-variant">Item sales pricing, freight values &amp; order-level line metrics</td>
+                      </tr>
+                      <tr>
+                        <td className="py-2.5 px-4 font-semibold text-primary">products</td>
+                        <td className="py-2.5 px-4 text-on-surface-variant">product_id (PK)</td>
+                        <td className="py-2.5 px-4 text-on-surface-variant">Product category classifications &amp; category sales rankings</td>
+                      </tr>
+                      <tr className="bg-surface/30">
+                        <td className="py-2.5 px-4 font-semibold text-primary">sellers</td>
+                        <td className="py-2.5 px-4 text-on-surface-variant">seller_id (PK), seller_city, seller_state</td>
+                        <td className="py-2.5 px-4 text-on-surface-variant">Individual seller revenue analysis &amp; merchant concentration</td>
+                      </tr>
+                      <tr>
+                        <td className="py-2.5 px-4 font-semibold text-primary">order_reviews</td>
+                        <td className="py-2.5 px-4 text-on-surface-variant">review_id (PK), order_id (FK)</td>
+                        <td className="py-2.5 px-4 text-on-surface-variant">Customer satisfaction ratings (1-5 review score distributions)</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </section>
+
+            {/* SECTION 03 // SQL QUERYING & METHODOLOGY */}
+            <section id="methodology" className="scroll-mt-24">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="text-xs font-mono text-primary font-semibold">SECTION 03</span>
+                <span className="h-px w-8 bg-outline-variant/60" />
+                <h2 className="text-xl font-semibold text-on-surface">SQL Querying &amp; Analytical Methodology</h2>
+              </div>
+
+              <p className="text-sm text-on-surface-variant leading-relaxed mb-6">
+                {project.approach}
+              </p>
+
+              {/* 4-Step Engineering Protocol */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <div className="p-4 bg-surface-container-lowest border border-outline-variant/40 rounded">
+                  <span className="text-xs font-mono text-primary font-semibold">01 / DELIVERED ORDER ISOLATION</span>
+                  <p className="text-xs text-on-surface-variant mt-1.5 leading-normal">
+                    Restricting sales metrics strictly to records with <code className="text-primary font-mono font-semibold">order_status = &apos;delivered&apos;</code> to evaluate confirmed transactions rather than cancelled or pending orders.
                   </p>
+                </div>
 
-                  {/* Monospace Schema Table */}
-                  <div className="bg-surface-container-lowest border border-outline-variant/40 rounded overflow-hidden shadow-xs">
-                    <div className="bg-surface-container-low px-4 py-2.5 border-b border-outline-variant/30 flex justify-between items-center text-xs font-mono">
-                      <span className="text-on-surface font-semibold flex items-center gap-1.5">
-                        <Table className="h-4 w-4 text-primary" />
-                        Relational Tables Analyzed
-                      </span>
-                      <span className="text-emerald-700 text-[11px] font-medium flex items-center gap-1">
-                        <CheckCircle2 className="h-3 w-3" />
-                        Relational Joins Verified
-                      </span>
-                    </div>
-
-                    <div className="overflow-x-auto">
-                      <table className="w-full text-left border-collapse text-xs font-mono">
-                        <thead>
-                          <tr className="border-b border-outline-variant/30 text-outline bg-surface/50">
-                            <th className="py-2.5 px-4 font-medium">Table Name</th>
-                            <th className="py-2.5 px-4 font-medium">Key Identifiers</th>
-                            <th className="py-2.5 px-4 font-medium">Analytical Purpose</th>
-                          </tr>
-                        </thead>
-                        <tbody className="divide-y divide-outline-variant/20 text-on-surface">
-                          <tr>
-                            <td className="py-2.5 px-4 font-semibold text-primary">orders</td>
-                            <td className="py-2.5 px-4 text-on-surface-variant">order_id (PK), customer_id</td>
-                            <td className="py-2.5 px-4 text-on-surface-variant">Order status filtering (delivered) &amp; timestamp milestones</td>
-                          </tr>
-                          <tr className="bg-surface/30">
-                            <td className="py-2.5 px-4 font-semibold text-primary">order_items</td>
-                            <td className="py-2.5 px-4 text-on-surface-variant">order_id (FK), product_id, seller_id</td>
-                            <td className="py-2.5 px-4 text-on-surface-variant">Item sales pricing, freight values &amp; order-level line metrics</td>
-                          </tr>
-                          <tr>
-                            <td className="py-2.5 px-4 font-semibold text-primary">products</td>
-                            <td className="py-2.5 px-4 text-on-surface-variant">product_id (PK)</td>
-                            <td className="py-2.5 px-4 text-on-surface-variant">Product category classifications &amp; category sales rankings</td>
-                          </tr>
-                          <tr className="bg-surface/30">
-                            <td className="py-2.5 px-4 font-semibold text-primary">sellers</td>
-                            <td className="py-2.5 px-4 text-on-surface-variant">seller_id (PK), seller_city, seller_state</td>
-                            <td className="py-2.5 px-4 text-on-surface-variant">Individual seller revenue analysis &amp; merchant concentration</td>
-                          </tr>
-                          <tr>
-                            <td className="py-2.5 px-4 font-semibold text-primary">order_reviews</td>
-                            <td className="py-2.5 px-4 text-on-surface-variant">review_id (PK), order_id (FK)</td>
-                            <td className="py-2.5 px-4 text-on-surface-variant">Customer satisfaction ratings (1-5 review score distributions)</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </section>
-
-                {/* SECTION 03 // SQL QUERYING & METHODOLOGY */}
-                <section id="methodology" className="scroll-mt-24">
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="text-xs font-mono text-primary font-semibold">SECTION 03</span>
-                    <span className="h-px w-8 bg-outline-variant/60" />
-                    <h2 className="text-xl font-semibold text-on-surface">SQL Querying &amp; Analytical Methodology</h2>
-                  </div>
-
-                  <p className="text-sm text-on-surface-variant leading-relaxed mb-6">
-                    {project.approach}
+                <div className="p-4 bg-surface-container-lowest border border-outline-variant/40 rounded">
+                  <span className="text-xs font-mono text-primary font-semibold">02 / MULTI-TABLE RELATIONAL JOINS</span>
+                  <p className="text-xs text-on-surface-variant mt-1.5 leading-normal">
+                    Formulating clean multi-table joins across orders, order items, products, sellers, and customer reviews to aggregate multidimensional commercial attributes.
                   </p>
+                </div>
 
-                  {/* 4-Step Engineering Protocol */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                    <div className="p-4 bg-surface-container-lowest border border-outline-variant/40 rounded">
-                      <span className="text-xs font-mono text-primary font-semibold">01 / DELIVERED ORDER ISOLATION</span>
-                      <p className="text-xs text-on-surface-variant mt-1.5 leading-normal">
-                        Restricting sales metrics strictly to records with <code className="text-primary font-mono font-semibold">order_status = &apos;delivered&apos;</code> to evaluate confirmed transactions rather than cancelled or pending orders.
-                      </p>
-                    </div>
+                <div className="p-4 bg-surface-container-lowest border border-outline-variant/40 rounded">
+                  <span className="text-xs font-mono text-primary font-semibold">03 / TEMPORAL SALES AGGREGATION</span>
+                  <p className="text-xs text-on-surface-variant mt-1.5 leading-normal">
+                    Using <code className="text-primary font-mono font-semibold">DATE_FORMAT()</code> and <code className="text-primary font-mono font-semibold">SUM(price)</code> grouped by year and month to uncover chronological revenue peaks and seasonal surges.
+                  </p>
+                </div>
 
-                    <div className="p-4 bg-surface-container-lowest border border-outline-variant/40 rounded">
-                      <span className="text-xs font-mono text-primary font-semibold">02 / MULTI-TABLE RELATIONAL JOINS</span>
-                      <p className="text-xs text-on-surface-variant mt-1.5 leading-normal">
-                        Formulating clean multi-table joins across orders, order items, products, sellers, and customer reviews to aggregate multidimensional commercial attributes.
-                      </p>
-                    </div>
+                <div className="p-4 bg-surface-container-lowest border border-outline-variant/40 rounded">
+                  <span className="text-xs font-mono text-primary font-semibold">04 / CATEGORY &amp; SELLER RANKINGS</span>
+                  <p className="text-xs text-on-surface-variant mt-1.5 leading-normal">
+                    Applying <code className="text-primary font-mono font-semibold">ORDER BY DESC</code>, <code className="text-primary font-mono font-semibold">LIMIT</code>, and <code className="text-primary font-mono font-semibold">AVG()</code> to isolate top product verticals, individual seller volumes, and review averages.
+                  </p>
+                </div>
+              </div>
 
-                    <div className="p-4 bg-surface-container-lowest border border-outline-variant/40 rounded">
-                      <span className="text-xs font-mono text-primary font-semibold">03 / TEMPORAL SALES AGGREGATION</span>
-                      <p className="text-xs text-on-surface-variant mt-1.5 leading-normal">
-                        Using <code className="text-primary font-mono font-semibold">DATE_FORMAT()</code> and <code className="text-primary font-mono font-semibold">SUM(price)</code> grouped by year and month to uncover chronological revenue peaks and seasonal surges.
-                      </p>
-                    </div>
-
-                    <div className="p-4 bg-surface-container-lowest border border-outline-variant/40 rounded">
-                      <span className="text-xs font-mono text-primary font-semibold">04 / CATEGORY &amp; SELLER RANKINGS</span>
-                      <p className="text-xs text-on-surface-variant mt-1.5 leading-normal">
-                        Applying <code className="text-primary font-mono font-semibold">ORDER BY DESC</code>, <code className="text-primary font-mono font-semibold">LIMIT</code>, and <code className="text-primary font-mono font-semibold">AVG()</code> to isolate top product verticals, individual seller volumes, and review averages.
-                      </p>
-                    </div>
+              {/* Code Snippet Box */}
+              <div className="bg-[#0b1320] rounded border border-outline-variant/40 overflow-hidden text-slate-100 shadow-xs">
+                <div className="flex items-center justify-between px-4 py-2 border-b border-slate-800 bg-slate-950/70 text-xs font-mono text-slate-400">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-slate-700" />
+                    <span>monthly_sales_and_categories.sql</span>
                   </div>
-
-                  {/* Code Snippet Box */}
-                  <div className="bg-[#0b1320] rounded border border-outline-variant/40 overflow-hidden text-slate-100 shadow-xs">
-                    <div className="flex items-center justify-between px-4 py-2 border-b border-slate-800 bg-slate-950/70 text-xs font-mono text-slate-400">
-                      <div className="flex items-center gap-2">
-                        <span className="w-2.5 h-2.5 rounded-full bg-slate-700" />
-                        <span>monthly_sales_and_categories.sql</span>
-                      </div>
-                      <span>MySQL • MySQL Workbench</span>
-                    </div>
-                    <div className="px-4 py-2 bg-slate-900/50 border-b border-slate-800/80 text-[11px] font-mono text-slate-400">
-                      Representative SQL query patterns executed for monthly sales trends and category performance.
-                    </div>
-                    <pre className="p-4 text-xs font-mono leading-relaxed overflow-x-auto text-slate-200">
-                      <code>{`-- 1. Monthly Delivered-Order Product Sales Analysis
+                  <span>MySQL • MySQL Workbench</span>
+                </div>
+                <div className="px-4 py-2 bg-slate-900/50 border-b border-slate-800/80 text-[11px] font-mono text-slate-400">
+                  Representative SQL query patterns executed for monthly sales trends and category performance.
+                </div>
+                <pre className="p-4 text-xs font-mono leading-relaxed overflow-x-auto text-slate-200">
+                  <code>{`-- 1. Monthly Delivered-Order Product Sales Analysis
 SELECT 
     DATE_FORMAT(o.order_delivered_customer_date, '%Y-%m') AS sales_month,
     ROUND(SUM(oi.price), 2) AS total_product_sales,
@@ -352,461 +335,191 @@ WHERE o.order_status = 'delivered'
 GROUP BY p.product_category_name
 ORDER BY total_category_sales DESC
 LIMIT 10;`}</code>
-                    </pre>
+                </pre>
+              </div>
+            </section>
+
+            {/* SECTION 04 // CORE ANALYSIS FOCUS AREAS */}
+            <section id="analysis-areas" className="scroll-mt-24">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="text-xs font-mono text-primary font-semibold">SECTION 04</span>
+                <span className="h-px w-8 bg-outline-variant/60" />
+                <h2 className="text-xl font-semibold text-on-surface">Core Analytical Focus Areas</h2>
+              </div>
+
+              <div className="space-y-4 text-sm sm:text-base text-on-surface-variant leading-relaxed">
+                <p>
+                  The SQL analysis targeted four distinct business dimensions to gain a comprehensive understanding of operational metrics across the marketplace:
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono">
+                  <div className="p-3.5 bg-surface-container-lowest border border-outline-variant/40 rounded">
+                    <span className="text-primary font-semibold block mb-1">Delivered Sales Trajectories</span>
+                    <span className="text-on-surface-variant">Time-series tracking of monthly order sales to identify seasonal spikes, operational growth, and peak order months.</span>
                   </div>
-                </section>
-
-                {/* SECTION 04 // CORE ANALYSIS FOCUS AREAS */}
-                <section id="analysis-areas" className="scroll-mt-24">
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="text-xs font-mono text-primary font-semibold">SECTION 04</span>
-                    <span className="h-px w-8 bg-outline-variant/60" />
-                    <h2 className="text-xl font-semibold text-on-surface">Core Analytical Focus Areas</h2>
+                  <div className="p-3.5 bg-surface-container-lowest border border-outline-variant/40 rounded">
+                    <span className="text-primary font-semibold block mb-1">Product Category Revenue</span>
+                    <span className="text-on-surface-variant">Identifying highest revenue-generating product verticals and evaluating demand distribution across diverse categories.</span>
                   </div>
-
-                  <div className="space-y-4 text-sm sm:text-base text-on-surface-variant leading-relaxed">
-                    <p>
-                      The SQL analysis targeted four distinct business dimensions to gain a comprehensive understanding of operational metrics across the marketplace:
-                    </p>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono">
-                      <div className="p-3.5 bg-surface-container-lowest border border-outline-variant/40 rounded">
-                        <span className="text-primary font-semibold block mb-1">Delivered Sales Trajectories</span>
-                        <span className="text-on-surface-variant">Time-series tracking of monthly order sales to identify seasonal spikes, operational growth, and peak order months.</span>
-                      </div>
-                      <div className="p-3.5 bg-surface-container-lowest border border-outline-variant/40 rounded">
-                        <span className="text-primary font-semibold block mb-1">Product Category Revenue</span>
-                        <span className="text-on-surface-variant">Identifying highest revenue-generating product verticals and evaluating demand distribution across diverse categories.</span>
-                      </div>
-                      <div className="p-3.5 bg-surface-container-lowest border border-outline-variant/40 rounded">
-                        <span className="text-primary font-semibold block mb-1">Merchant Performance</span>
-                        <span className="text-on-surface-variant">Evaluating sales volumes achieved by individual marketplace merchants and checking for revenue concentration.</span>
-                      </div>
-                      <div className="p-3.5 bg-surface-container-lowest border border-outline-variant/40 rounded">
-                        <span className="text-primary font-semibold block mb-1">Customer Review Ratings</span>
-                        <span className="text-on-surface-variant">Computing average customer review ratings across completed orders to gauge customer satisfaction across delivered orders.</span>
-                      </div>
-                    </div>
+                  <div className="p-3.5 bg-surface-container-lowest border border-outline-variant/40 rounded">
+                    <span className="text-primary font-semibold block mb-1">Merchant Performance</span>
+                    <span className="text-on-surface-variant">Evaluating sales volumes achieved by individual marketplace merchants and checking for revenue concentration.</span>
                   </div>
-                </section>
-
-                {/* SECTION 05 // VERIFIED KEY FINDINGS */}
-                <section id="findings" className="scroll-mt-24">
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="text-xs font-mono text-primary font-semibold">SECTION 05</span>
-                    <span className="h-px w-8 bg-outline-variant/60" />
-                    <h2 className="text-xl font-semibold text-on-surface">Verified Key Findings</h2>
+                  <div className="p-3.5 bg-surface-container-lowest border border-outline-variant/40 rounded">
+                    <span className="text-primary font-semibold block mb-1">Customer Review Ratings</span>
+                    <span className="text-on-surface-variant">Computing average customer review ratings across completed orders to gauge customer satisfaction across delivered orders.</span>
                   </div>
+                </div>
+              </div>
+            </section>
 
-                  <p className="text-sm text-on-surface-variant leading-relaxed mb-6">
-                    Key analytical metrics obtained from executing structured queries against the delivered orders dataset:
-                  </p>
+            {/* SECTION 05 // VERIFIED KEY FINDINGS */}
+            <section id="findings" className="scroll-mt-24">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="text-xs font-mono text-primary font-semibold">SECTION 05</span>
+                <span className="h-px w-8 bg-outline-variant/60" />
+                <h2 className="text-xl font-semibold text-on-surface">Verified Key Findings</h2>
+              </div>
 
-                  {/* 4 Stat Cards */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-                    <div className="p-5 bg-surface-container-lowest border border-outline-variant/50 rounded-xl shadow-xs flex flex-col justify-between">
-                      <div className="flex items-center justify-between mb-3">
-                        <span className="text-[11px] font-mono uppercase text-outline tracking-wider font-semibold">
-                          Peak Monthly Sales
-                        </span>
-                        <TrendingUp className="h-4 w-4 text-primary" />
-                      </div>
-                      <div>
-                        <div className="text-2xl sm:text-3xl font-mono font-bold text-primary">
-                          987,765.37
-                        </div>
-                        <div className="text-xs font-mono text-on-surface mt-1">
-                          November 2017
-                        </div>
-                        <p className="text-xs text-on-surface-variant mt-2 leading-relaxed">
-                          Highest monthly product sales recorded, driven by seasonal Black Friday promotional activity.
-                        </p>
-                      </div>
-                    </div>
+              <p className="text-sm text-on-surface-variant leading-relaxed mb-6">
+                Key analytical metrics obtained from executing structured queries against the delivered orders dataset:
+              </p>
 
-                    <div className="p-5 bg-surface-container-lowest border border-outline-variant/50 rounded-xl shadow-xs flex flex-col justify-between">
-                      <div className="flex items-center justify-between mb-3">
-                        <span className="text-[11px] font-mono uppercase text-outline tracking-wider font-semibold">
-                          Leading Product Category
-                        </span>
-                        <Award className="h-4 w-4 text-emerald-600" />
-                      </div>
-                      <div>
-                        <div className="text-2xl sm:text-3xl font-mono font-bold text-emerald-700">
-                          1,233,131.72
-                        </div>
-                        <div className="text-xs font-mono text-on-surface mt-1">
-                          Health &amp; Beauty
-                        </div>
-                        <p className="text-xs text-on-surface-variant mt-2 leading-relaxed">
-                          Top-performing product category by total sales volume across all catalog categories.
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="p-5 bg-surface-container-lowest border border-outline-variant/50 rounded-xl shadow-xs flex flex-col justify-between">
-                      <div className="flex items-center justify-between mb-3">
-                        <span className="text-[11px] font-mono uppercase text-outline tracking-wider font-semibold">
-                          Top Seller Product Sales
-                        </span>
-                        <Database className="h-4 w-4 text-primary" />
-                      </div>
-                      <div>
-                        <div className="text-2xl sm:text-3xl font-mono font-bold text-on-surface">
-                          226,987.93
-                        </div>
-                        <div className="text-xs font-mono text-on-surface-variant mt-1">
-                          Individual Merchant Peak
-                        </div>
-                        <p className="text-xs text-on-surface-variant mt-2 leading-relaxed">
-                          Highest individual merchant product sales volume recorded across all active sellers.
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="p-5 bg-surface-container-lowest border border-outline-variant/50 rounded-xl shadow-xs flex flex-col justify-between">
-                      <div className="flex items-center justify-between mb-3">
-                        <span className="text-[11px] font-mono uppercase text-outline tracking-wider font-semibold">
-                          Average Review Score
-                        </span>
-                        <Star className="h-4 w-4 text-amber-500 fill-amber-500" />
-                      </div>
-                      <div>
-                        <div className="text-2xl sm:text-3xl font-mono font-bold text-amber-600">
-                          ~4.09 / 5
-                        </div>
-                        <div className="text-xs font-mono text-on-surface-variant mt-1">
-                          Customer Satisfaction Average
-                        </div>
-                        <p className="text-xs text-on-surface-variant mt-2 leading-relaxed">
-                          Average customer review rating across delivered customer orders.
-                        </p>
-                      </div>
-                    </div>
+              {/* 4 Stat Cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                <div className="p-5 bg-surface-container-lowest border border-outline-variant/50 rounded-xl shadow-xs flex flex-col justify-between">
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-[11px] font-mono uppercase text-outline tracking-wider font-semibold">
+                      Peak Monthly Sales
+                    </span>
+                    <TrendingUp className="h-4 w-4 text-primary" />
                   </div>
-                </section>
-
-                {/* SECTION 06 // KEY LEARNINGS */}
-                {project.keyLearnings.length > 0 && (
-                  <section id="key-learnings" className="scroll-mt-24">
-                    <div className="flex items-center gap-3 mb-4">
-                      <span className="text-xs font-mono text-primary font-semibold">SECTION 06</span>
-                      <span className="h-px w-8 bg-outline-variant/60" />
-                      <h2 className="text-xl font-semibold text-on-surface">Key Practical Learnings</h2>
+                  <div>
+                    <div className="text-2xl sm:text-3xl font-mono font-bold text-primary">
+                      987,765.37
                     </div>
-
-                    <div className="space-y-3">
-                      {project.keyLearnings.map((learning, idx) => (
-                        <div
-                          key={idx}
-                          className="p-4 bg-surface-container-lowest border border-outline-variant/40 rounded flex items-start gap-3"
-                        >
-                          <CheckCircle2 className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-                          <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed">
-                            {learning}
-                          </p>
-                        </div>
-                      ))}
+                    <div className="text-xs font-mono text-on-surface mt-1">
+                      November 2017
                     </div>
-                  </section>
-                )}
-
-                {/* SECTION 07 // REPOSITORY & QUERY SCRIPTS */}
-                <section id="repository" className="scroll-mt-24">
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="text-xs font-mono text-primary font-semibold">SECTION 07</span>
-                    <span className="h-px w-8 bg-outline-variant/60" />
-                    <h2 className="text-xl font-semibold text-on-surface">Repository &amp; Query Scripts</h2>
-                  </div>
-
-                  <div className="p-5 bg-surface-container-lowest border border-outline-variant/40 rounded-xl space-y-4">
-                    <p className="text-sm text-on-surface-variant leading-relaxed">
-                      All SQL scripts, table creation routines, and analytical queries are documented and maintained in the project&apos;s public GitHub repository.
-                    </p>
-
-                    <div className="flex flex-wrap items-center gap-3 pt-2">
-                      <a
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="bg-on-surface text-surface-container-lowest hover:bg-primary px-5 py-2.5 rounded-lg text-sm font-medium transition-all flex items-center gap-2 shadow-xs hover:shadow-md"
-                      >
-                        <GithubIcon className="h-4 w-4" />
-                        <span>View on GitHub</span>
-                        <ExternalLink className="h-3.5 w-3.5 text-outline" />
-                      </a>
-                    </div>
-                  </div>
-                </section>
-              </>
-            ) : (
-              /* ============================================================ */
-              /* EXPLORATORY PROJECT: E-commerce Order Status Analysis Content */
-              /* ============================================================ */
-              <>
-                {/* SECTION 01 // OVERVIEW & PROBLEM STATEMENT */}
-                <section id="problem-statement" className="scroll-mt-24">
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="text-xs font-mono text-primary font-semibold">SECTION 01</span>
-                    <span className="h-px w-8 bg-outline-variant/60" />
-                    <h2 className="text-xl font-semibold text-on-surface">Problem Statement &amp; Scope</h2>
-                  </div>
-
-                  <div className="space-y-4 text-sm sm:text-base text-on-surface-variant leading-relaxed">
-                    <p>{project.overview}</p>
-                    <p>{project.problem}</p>
-                    <div className="p-3.5 bg-surface-container-low border border-outline-variant/40 rounded font-mono text-xs text-on-surface">
-                      Exploratory Target: Order Intake → Fulfillment → In-Transit → Terminal Status (Delivered / Cancelled)
-                    </div>
-                    <p className="text-xs sm:text-sm text-outline">
-                      As a computer science engineering student learning AI/ML and data science, this project is undertaken as hands-on practice to develop disciplined data cleaning routines, inspect structural categorical distributions, and document analytical observations transparently.
+                    <p className="text-xs text-on-surface-variant mt-2 leading-relaxed">
+                      Highest monthly product sales recorded, driven by seasonal Black Friday promotional activity.
                     </p>
                   </div>
-                </section>
+                </div>
 
-                {/* SECTION 02 // DATASET & SCHEMA OVERVIEW */}
-                <section id="dataset-schema" className="scroll-mt-24">
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="text-xs font-mono text-primary font-semibold">SECTION 02</span>
-                    <span className="h-px w-8 bg-outline-variant/60" />
-                    <h2 className="text-xl font-semibold text-on-surface">Dataset &amp; Schema [Pending Ingestion]</h2>
+                <div className="p-5 bg-surface-container-lowest border border-outline-variant/50 rounded-xl shadow-xs flex flex-col justify-between">
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-[11px] font-mono uppercase text-outline tracking-wider font-semibold">
+                      Leading Product Category
+                    </span>
+                    <Award className="h-4 w-4 text-emerald-600" />
                   </div>
-
-                  <p className="text-sm text-on-surface-variant leading-relaxed mb-4">
-                    The analysis focuses on exploring transactional order records, particularly the distribution of status values across order lifecycles.
-                  </p>
-
-                  {/* Pending Workspace Notice Callout */}
-                  <div className="p-3.5 mb-6 bg-surface-container-low border border-outline-variant/40 rounded flex items-start gap-2.5 text-xs font-mono text-on-surface-variant">
-                    <AlertCircle className="h-4 w-4 text-amber-600 shrink-0 mt-0.5" />
-                    <div>
-                      <span className="font-semibold text-on-surface">Verification Status:</span> No local dataset or notebook file is checked directly into this repository at present. The schema below represents the target analytical schema under exploratory review, pending verified dataset ingestion.
+                  <div>
+                    <div className="text-2xl sm:text-3xl font-mono font-bold text-emerald-700">
+                      1,233,131.72
                     </div>
-                  </div>
-
-                  {/* Monospace Schema Table */}
-                  <div className="bg-surface-container-lowest border border-outline-variant/40 rounded overflow-hidden shadow-xs">
-                    <div className="bg-surface-container-low px-4 py-2.5 border-b border-outline-variant/30 flex justify-between items-center text-xs font-mono">
-                      <span className="text-on-surface font-semibold flex items-center gap-1.5">
-                        <Table className="h-4 w-4 text-primary" />
-                        Target Schema Structure
-                      </span>
-                      <span className="text-outline text-[11px]">Pending Active Data</span>
+                    <div className="text-xs font-mono text-on-surface mt-1">
+                      Health &amp; Beauty
                     </div>
+                    <p className="text-xs text-on-surface-variant mt-2 leading-relaxed">
+                      Top-performing product category by total sales volume across all catalog categories.
+                    </p>
+                  </div>
+                </div>
 
-                    <div className="overflow-x-auto">
-                      <table className="w-full text-left border-collapse text-xs font-mono">
-                        <thead>
-                          <tr className="border-b border-outline-variant/30 text-outline bg-surface/50">
-                            <th className="py-2.5 px-4 font-medium">Field Identifier</th>
-                            <th className="py-2.5 px-4 font-medium">Target Type</th>
-                            <th className="py-2.5 px-4 font-medium">Analytical Purpose</th>
-                          </tr>
-                        </thead>
-                        <tbody className="divide-y divide-outline-variant/20 text-on-surface">
-                          <tr>
-                            <td className="py-2.5 px-4 font-semibold text-primary">order_id</td>
-                            <td className="py-2.5 px-4 text-on-surface-variant">string / identifier</td>
-                            <td className="py-2.5 px-4 text-on-surface-variant">Primary transaction key; checked for uniqueness</td>
-                          </tr>
-                          <tr className="bg-surface/30">
-                            <td className="py-2.5 px-4 font-semibold text-primary">order_status</td>
-                            <td className="py-2.5 px-4 text-on-surface-variant">category / string</td>
-                            <td className="py-2.5 px-4 text-on-surface-variant">Target variable for frequency and distribution analysis</td>
-                          </tr>
-                          <tr>
-                            <td className="py-2.5 px-4 font-semibold text-primary">timestamp_fields</td>
-                            <td className="py-2.5 px-4 text-on-surface-variant">datetime (UTC)</td>
-                            <td className="py-2.5 px-4 text-on-surface-variant">Lifecycle milestones (purchase, approval, fulfillment)</td>
-                          </tr>
-                        </tbody>
-                      </table>
+                <div className="p-5 bg-surface-container-lowest border border-outline-variant/50 rounded-xl shadow-xs flex flex-col justify-between">
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-[11px] font-mono uppercase text-outline tracking-wider font-semibold">
+                      Top Seller Product Sales
+                    </span>
+                    <Database className="h-4 w-4 text-primary" />
+                  </div>
+                  <div>
+                    <div className="text-2xl sm:text-3xl font-mono font-bold text-on-surface">
+                      226,987.93
                     </div>
+                    <div className="text-xs font-mono text-on-surface-variant mt-1">
+                      Individual Merchant Peak
+                    </div>
+                    <p className="text-xs text-on-surface-variant mt-2 leading-relaxed">
+                      Highest individual merchant product sales volume recorded across all active sellers.
+                    </p>
                   </div>
-                </section>
+                </div>
 
-                {/* SECTION 03 // DATA SANITATION & METHODOLOGY */}
-                <section id="methodology" className="scroll-mt-24">
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="text-xs font-mono text-primary font-semibold">SECTION 03</span>
-                    <span className="h-px w-8 bg-outline-variant/60" />
-                    <h2 className="text-xl font-semibold text-on-surface">Data Inspection &amp; Cleaning Methodology</h2>
+                <div className="p-5 bg-surface-container-lowest border border-outline-variant/50 rounded-xl shadow-xs flex flex-col justify-between">
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-[11px] font-mono uppercase text-outline tracking-wider font-semibold">
+                      Average Review Score
+                    </span>
+                    <Star className="h-4 w-4 text-amber-500 fill-amber-500" />
                   </div>
+                  <div>
+                    <div className="text-2xl sm:text-3xl font-mono font-bold text-amber-600">
+                      ~4.09 / 5
+                    </div>
+                    <div className="text-xs font-mono text-on-surface-variant mt-1">
+                      Customer Satisfaction Average
+                    </div>
+                    <p className="text-xs text-on-surface-variant mt-2 leading-relaxed">
+                      Average customer review rating across delivered customer orders.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </section>
 
-                  <p className="text-sm text-on-surface-variant leading-relaxed mb-6">
-                    {project.approach}
-                  </p>
+            {/* SECTION 06 // KEY LEARNINGS */}
+            {project.keyLearnings.length > 0 && (
+              <section id="key-learnings" className="scroll-mt-24">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="text-xs font-mono text-primary font-semibold">SECTION 06</span>
+                  <span className="h-px w-8 bg-outline-variant/60" />
+                  <h2 className="text-xl font-semibold text-on-surface">Key Practical Learnings</h2>
+                </div>
 
-                  {/* 4-Step Engineering Protocol */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                    <div className="p-4 bg-surface-container-lowest border border-outline-variant/40 rounded">
-                      <span className="text-xs font-mono text-primary font-semibold">01 / MISSING VALUE INSPECTION</span>
-                      <p className="text-xs text-on-surface-variant mt-1.5 leading-normal">
-                        Evaluating missing records across fields and determining if missing milestones correspond to valid intermediate or cancelled statuses.
+                <div className="space-y-3">
+                  {project.keyLearnings.map((learning, idx) => (
+                    <div
+                      key={idx}
+                      className="p-4 bg-surface-container-lowest border border-outline-variant/40 rounded flex items-start gap-3"
+                    >
+                      <CheckCircle2 className="h-4 w-4 text-primary shrink-0 mt-0.5" />
+                      <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed">
+                        {learning}
                       </p>
                     </div>
-
-                    <div className="p-4 bg-surface-container-lowest border border-outline-variant/40 rounded">
-                      <span className="text-xs font-mono text-primary font-semibold">02 / DATETIME TYPE CONVERSION</span>
-                      <p className="text-xs text-on-surface-variant mt-1.5 leading-normal">
-                        Practising parsing string representations of dates into proper Pandas datetime types for consistent temporal queries.
-                      </p>
-                    </div>
-
-                    <div className="p-4 bg-surface-container-lowest border border-outline-variant/40 rounded">
-                      <span className="text-xs font-mono text-primary font-semibold">03 / CATEGORICAL VALUE COUNTS</span>
-                      <p className="text-xs text-on-surface-variant mt-1.5 leading-normal">
-                        Computing frequency counts and normalized percentages across discrete values in the order_status column.
-                      </p>
-                    </div>
-
-                    <div className="p-4 bg-surface-container-lowest border border-outline-variant/40 rounded">
-                      <span className="text-xs font-mono text-primary font-semibold">04 / WORKFLOW REPRODUCIBILITY</span>
-                      <p className="text-xs text-on-surface-variant mt-1.5 leading-normal">
-                        Structuring exploratory cells in Jupyter notebooks with clean markdown explanations and reproducible step sequences.
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Code Snippet Box */}
-                  <div className="bg-[#0b1320] rounded border border-outline-variant/40 overflow-hidden text-slate-100 shadow-xs">
-                    <div className="flex items-center justify-between px-4 py-2 border-b border-slate-800 bg-slate-950/70 text-xs font-mono text-slate-400">
-                      <div className="flex items-center gap-2">
-                        <span className="w-2.5 h-2.5 rounded-full bg-slate-700" />
-                        <span>workflow_pattern.py (Illustrative Practice Snippet)</span>
-                      </div>
-                      <span>Python 3 • Pandas</span>
-                    </div>
-                    <div className="px-4 py-2 bg-slate-900/50 border-b border-slate-800/80 text-[11px] font-mono text-slate-400">
-                      Note: Illustrative exploratory workflow pattern for data cleaning and order_status exploration.
-                    </div>
-                    <pre className="p-4 text-xs font-mono leading-relaxed overflow-x-auto text-slate-200">
-                      <code>{`# Planned exploratory workflow pattern using Python & Pandas
-import pandas as pd
-
-def inspect_and_analyze_order_status(df: pd.DataFrame) -> pd.DataFrame:
-    # 1. Inspect dataset structure & completeness
-    # df.info()
-    # df.isnull().sum()
-
-    # 2. Check for unique record identifiers
-    # is_unique = df['order_id'].is_unique
-
-    # 3. Explore categorical frequency distributions
-    status_counts = df['order_status'].value_counts()
-    status_proportions = df['order_status'].value_counts(normalize=True) * 100
-
-    summary = pd.DataFrame({
-        'count': status_counts,
-        'percentage': status_proportions.round(2)
-    })
-    return summary`}</code>
-                    </pre>
-                  </div>
-                </section>
-
-                {/* SECTION 04 // ORDER STATUS FREQUENCY ANALYSIS */}
-                <section id="frequency-analysis" className="scroll-mt-24">
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="text-xs font-mono text-primary font-semibold">SECTION 04</span>
-                    <span className="h-px w-8 bg-outline-variant/60" />
-                    <h2 className="text-xl font-semibold text-on-surface">Order Status Frequency Analysis</h2>
-                  </div>
-
-                  <div className="space-y-4 text-sm sm:text-base text-on-surface-variant leading-relaxed">
-                    <p>
-                      The primary focus of this project is understanding the distribution and behavior of the <code className="text-xs font-mono px-1.5 py-0.5 bg-surface-container-low rounded text-on-surface">order_status</code> categorical column.
-                    </p>
-                    <p>
-                      In e-commerce operations, order status frequency provides direct insight into operational throughput:
-                    </p>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono">
-                      <div className="p-3.5 bg-surface-container-lowest border border-outline-variant/40 rounded">
-                        <span className="text-primary font-semibold block mb-1">Terminal Fulfillment Ratio</span>
-                        <span className="text-on-surface-variant">The proportion of total transactions that successfully conclude in a delivered state versus intermediate states.</span>
-                      </div>
-                      <div className="p-3.5 bg-surface-container-lowest border border-outline-variant/40 rounded">
-                        <span className="text-primary font-semibold block mb-1">Exception &amp; Cancellation Rates</span>
-                        <span className="text-on-surface-variant">Observing non-delivered statuses (cancelled, unavailable, returned) to identify potential stages of friction.</span>
-                      </div>
-                    </div>
-                  </div>
-                </section>
-
-                {/* SECTION 05 // VERIFIED FINDINGS */}
-                <section id="findings" className="scroll-mt-24">
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="text-xs font-mono text-primary font-semibold">SECTION 05</span>
-                    <span className="h-px w-8 bg-outline-variant/60" />
-                    <h2 className="text-xl font-semibold text-on-surface">Empirical Findings [Pending Verification]</h2>
-                  </div>
-
-                  <div className="p-4 bg-surface-container-lowest border border-outline-variant/40 rounded space-y-3">
-                    <div className="flex items-start gap-2.5 text-xs font-mono text-on-surface-variant">
-                      <Clock className="h-4 w-4 text-amber-600 shrink-0 mt-0.5" />
-                      <div>
-                        <span className="font-semibold text-on-surface">Analysis In Progress:</span> Specific numerical metrics, record counts, and percentage breakdowns are withheld until the active dataset is ingested and verified in a notebook.
-                      </div>
-                    </div>
-                    <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed">
-                      To maintain strict engineering integrity, no numerical conclusions or business impact figures are assumed in advance. Verified frequency counts and distributions will be documented here upon completion of the exploratory notebook.
-                    </p>
-                  </div>
-                </section>
-
-                {/* SECTION 06 // KEY LEARNINGS */}
-                {project.keyLearnings.length > 0 && (
-                  <section id="key-learnings" className="scroll-mt-24">
-                    <div className="flex items-center gap-3 mb-4">
-                      <span className="text-xs font-mono text-primary font-semibold">SECTION 06</span>
-                      <span className="h-px w-8 bg-outline-variant/60" />
-                      <h2 className="text-xl font-semibold text-on-surface">Key Practical Learnings</h2>
-                    </div>
-
-                    <div className="space-y-3">
-                      {project.keyLearnings.map((learning, idx) => (
-                        <div
-                          key={idx}
-                          className="p-4 bg-surface-container-lowest border border-outline-variant/40 rounded flex items-start gap-3"
-                        >
-                          <CheckCircle2 className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-                          <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed">
-                            {learning}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
-                  </section>
-                )}
-
-                {/* SECTION 07 // LIMITATIONS & NEXT STEPS */}
-                <section id="limitations-next-steps" className="scroll-mt-24">
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="text-xs font-mono text-primary font-semibold">SECTION 07</span>
-                    <span className="h-px w-8 bg-outline-variant/60" />
-                    <h2 className="text-xl font-semibold text-on-surface">Limitations &amp; Planned Next Steps</h2>
-                  </div>
-
-                  <div className="p-4 bg-surface-container-lowest border border-outline-variant/40 rounded space-y-2.5 text-xs sm:text-sm text-on-surface-variant">
-                    <p className="flex items-start gap-2">
-                      <span className="text-primary font-mono font-semibold">→</span>
-                      <span><strong>Workspace Ingestion:</strong> Check in the raw dataset and publish the documented Jupyter Notebook (.ipynb).</span>
-                    </p>
-                    <p className="flex items-start gap-2">
-                      <span className="text-primary font-mono font-semibold">→</span>
-                      <span><strong>Visual Distributions:</strong> Generate Seaborn and Matplotlib bar charts for status frequencies.</span>
-                    </p>
-                    <p className="flex items-start gap-2">
-                      <span className="text-primary font-mono font-semibold">→</span>
-                      <span><strong>SQL Cross-Validation:</strong> Practice translating Pandas value_counts queries into standard SQL aggregations.</span>
-                    </p>
-                    <p className="flex items-start gap-2">
-                      <span className="text-primary font-mono font-semibold">→</span>
-                      <span><strong>Lifecycle Flow Validation:</strong> Verify that timestamp sequences follow expected chronological transitions.</span>
-                    </p>
-                  </div>
-                </section>
-              </>
+                  ))}
+                </div>
+              </section>
             )}
+
+            {/* SECTION 07 // REPOSITORY & QUERY SCRIPTS */}
+            <section id="repository" className="scroll-mt-24">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="text-xs font-mono text-primary font-semibold">SECTION 07</span>
+                <span className="h-px w-8 bg-outline-variant/60" />
+                <h2 className="text-xl font-semibold text-on-surface">Repository &amp; Query Scripts</h2>
+              </div>
+
+              <div className="p-5 bg-surface-container-lowest border border-outline-variant/40 rounded-xl space-y-4">
+                <p className="text-sm text-on-surface-variant leading-relaxed">
+                  All SQL scripts, table creation routines, and analytical queries are documented and maintained in the project&apos;s public GitHub repository.
+                </p>
+
+                <div className="flex flex-wrap items-center gap-3 pt-2">
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-on-surface text-surface-container-lowest hover:bg-primary px-5 py-2.5 rounded-lg text-sm font-medium transition-all flex items-center gap-2 shadow-xs hover:shadow-md"
+                  >
+                    <GithubIcon className="h-4 w-4" />
+                    <span>View on GitHub</span>
+                    <ExternalLink className="h-3.5 w-3.5 text-outline" />
+                  </a>
+                </div>
+              </div>
+            </section>
           </div>
 
           {/* RIGHT 4-COLUMN COLUMN: STICKY CONTEXT SIDEBAR */}
@@ -827,25 +540,25 @@ def inspect_and_analyze_order_status(df: pd.DataFrame) -> pd.DataFrame:
                   href="#dataset-schema"
                   className="block text-on-surface-variant hover:text-primary transition-colors py-1 pl-2 border-l border-outline-variant/40 hover:border-primary"
                 >
-                  02 // {isSqlProject ? "Relational Schema" : "Dataset & Schema [Pending]"}
+                  02 // Relational Schema
                 </a>
                 <a
                   href="#methodology"
                   className="block text-on-surface-variant hover:text-primary transition-colors py-1 pl-2 border-l border-outline-variant/40 hover:border-primary"
                 >
-                  03 // {isSqlProject ? "SQL Methodology" : "Data Cleaning"}
+                  03 // SQL Methodology
                 </a>
                 <a
-                  href={isSqlProject ? "#analysis-areas" : "#frequency-analysis"}
+                  href="#analysis-areas"
                   className="block text-on-surface-variant hover:text-primary transition-colors py-1 pl-2 border-l border-outline-variant/40 hover:border-primary"
                 >
-                  04 // {isSqlProject ? "Analysis Focus" : "Frequency Analysis"}
+                  04 // Analysis Focus
                 </a>
                 <a
                   href="#findings"
                   className="block text-on-surface-variant hover:text-primary transition-colors py-1 pl-2 border-l border-outline-variant/40 hover:border-primary"
                 >
-                  05 // {isSqlProject ? "Verified Findings" : "Empirical Findings [Pending]"}
+                  05 // Verified Findings
                 </a>
                 {project.keyLearnings.length > 0 && (
                   <a
@@ -856,10 +569,10 @@ def inspect_and_analyze_order_status(df: pd.DataFrame) -> pd.DataFrame:
                   </a>
                 )}
                 <a
-                  href={isSqlProject ? "#repository" : "#limitations-next-steps"}
+                  href="#repository"
                   className="block text-on-surface-variant hover:text-primary transition-colors py-1 pl-2 border-l border-outline-variant/40 hover:border-primary"
                 >
-                  07 // {isSqlProject ? "SQL Repository" : "Limitations & Next Steps"}
+                  07 // SQL Repository
                 </a>
               </nav>
 
@@ -888,9 +601,7 @@ def inspect_and_analyze_order_status(df: pd.DataFrame) -> pd.DataFrame:
               <div className="p-3 bg-surface-container-low rounded border border-outline-variant/30 text-xs font-mono text-on-surface-variant flex items-start gap-2">
                 <Info className="h-4 w-4 text-primary shrink-0 mt-0.5" />
                 <span>
-                  {isSqlProject
-                    ? "Completed SQL project. Verified queries and key findings documented in GitHub repository."
-                    : "Student exploratory project focused on Python and Pandas data cleaning practice. Unverified findings remain pending."}
+                  Completed SQL project. Verified queries and key findings documented in GitHub repository.
                 </span>
               </div>
 
